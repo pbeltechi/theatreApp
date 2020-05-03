@@ -1,0 +1,42 @@
+<!-- Wrapper -->
+<div id="wrapper">
+
+  <!-- Header -->
+  <header id="header">
+    <h1>Tonight's show <a *ngIf="tonightRepresentation">{{tonightRepresentation.title}}</a></h1>
+  </header>
+  <div class="form">
+    <input [(ngModel)]="firstName" type="text" placeholder="Your first name">
+    <input [(ngModel)]="lastName" type="text" placeholder="Your last name">
+  </div>
+  <ng-template [ngIf]="roomSeats">
+    <ng-container *ngFor="let seat of roomSeats">
+      <div [ngClass]="{'reserved': seat.reserved}" #seatDiv class="seats" (click)="selectSeat(seatDiv,seat)">
+        <p>Position: {{seat.lodge}}, Row: {{seat.row}}</p>
+        <p>Seat number: {{seat.seatNumber}}</p>
+        <p>Price: {{seat.price}}</p>
+        <p>Reserved: {{seat.reserved}}</p>
+      </div>
+    </ng-container>
+  </ng-template>
+  <ng-template [ngIf]="error">
+    <div class="error">
+      <p>{{error}}</p>
+    </div>
+  </ng-template>
+  <ng-template [ngIf]="information">
+    <div class="information">
+      <p>{{information}}</p>
+    </div>
+  </ng-template>
+  <div class="center">
+    <label class="icon" (click)="reserveSeats()">Total price: {{price}}</label>
+  </div>
+  <div class="center">
+    <button [disabled]="canReserve()" class="icon style2" (click)="reserveSeats()">Reserve</button>
+  </div>
+</div>
+<!-- Footer -->
+<footer id="footer">
+  <p>&copy; Theatre. All rights reserved.</p>
+</footer>

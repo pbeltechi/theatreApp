@@ -1,0 +1,39 @@
+<!-- Wrapper -->
+<div id="wrapper">
+
+  <!-- Header -->
+  <header id="header">
+    <span class="avatar"><img src="../../assets/images/logo.png" alt="logo"/></span>
+    <h1>Our <a href="#">Theatre</a></h1>
+    <ul class="icons">
+      <li><a class="icon style2 reserve" routerLink="/reserve">Reserve tickets for tonight</a></li>
+    </ul>
+  </header>
+
+  <!-- Main -->
+  <section id="main">
+
+    <!-- Thumbnails -->
+    <section class="thumbnails">
+      <ng-template [ngIf]="representations">
+        <ng-container *ngFor="let _ of representations;let i = index">
+          <div *ngIf="i%2==0">
+            <a>
+              <img src="../../assets/images/thumbs/0{{representations[i].id}}.jpg" alt="representation"/>
+              <h3>{{representations[i].title}}</h3>
+            </a>
+            <a>
+              <img src="../../assets/images/thumbs/0{{representations[i + 1].id}}.jpg" alt="representation"/>
+              <h3>{{representations[i + 1].title}}</h3>
+            </a>
+          </div>
+        </ng-container>
+      </ng-template>
+    </section>
+  </section>
+  <!-- Footer -->
+  <footer id="footer">
+    <p>&copy; Theatre. All rights reserved.</p>
+  </footer>
+</div>
+
