@@ -1,6 +1,17 @@
 import {HttpHeaders} from "@angular/common/http";
 import {Time} from "@angular/common";
 
+export class Admin {
+  id: number;
+  username: string;
+  password: string;
+  constructor(id,username,password) {
+    this.id = id;
+    this.username = username;
+    this.password = password;
+  }
+}
+
 export class Seat {
   id: number;
   row: number;
@@ -53,8 +64,17 @@ export class Representation {
   title: string;
   date: Date;
   time: Time;
-  location: String;
+  location: string;
   seats: Seat[];
+
+  constructor(id,title,location,date,time) {
+    this.id = id;
+    this.title = title;
+    this.location = location;
+    this.date = date;
+    this.time = time;
+    this.seats = [];
+  }
 }
 
 export const httpOptions = {

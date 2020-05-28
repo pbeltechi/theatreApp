@@ -29,8 +29,6 @@ public class Seat {
 
     }
 
-
-
     public Seat(Integer id, Integer row, String lodge, Integer seatNumber, Double price) {
         this.id = id;
         this.row = row;

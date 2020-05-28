@@ -20,8 +20,6 @@ public class SeatDTO {
         this.reserved = reserved;
     }
 
-
-
     @Override
     public String toString() {
         return "SeatDTO{" +

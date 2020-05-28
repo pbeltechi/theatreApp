@@ -22,8 +22,8 @@ public class RepresentationServiceImpl implements RepresentationService {
 
     @Autowired
     RepresentationRepository representationRepository;
-//    @Autowired
-//    SeatRepository seatRepository;
+    @Autowired
+    SeatRepository seatRepository;
 //    @Autowired
 //    ClientRepository clientRepository;
     @Autowired
@@ -67,6 +67,37 @@ public class RepresentationServiceImpl implements RepresentationService {
             seatsDTO.add(seatDTO);
         }
         return seatsDTO;
+    }
+
+    @Override
+    public void save(Representation representation) throws Exception {
+        Optional<Representation> found = this.representationRepository.findById(representation.getId());
+        if(found.isPresent()){
+            throw new Exception("entity already exists");
+        }
+        List<Seat> seats = this.seatRepository.findAll();
+        representation.setSeats(seats);
+        this.representationRepository.save(representation);
+    }
+
+    @Override
+    public void update(Representation representation) throws Exception {
+        Optional<Representation> found = this.representationRepository.findById(representation.getId());
+        if(found.isEmpty()){
+            throw new Exception("entity does not exist");
+        }
+        List<Seat> seats = this.seatRepository.findAll();
+        representation.setSeats(seats);
+        this.representationRepository.save(representation);
+    }
+
+    @Override
+    public void delete(Integer id) throws Exception {
+        Optional<Representation> found = this.representationRepository.findById(id);
+        if(found.isEmpty()){
+            throw new Exception("entity does not exist");
+        }
+        this.representationRepository.deleteById(id);
     }
 
 }

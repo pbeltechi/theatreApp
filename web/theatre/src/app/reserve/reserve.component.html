@@ -4,6 +4,7 @@
   <!-- Header -->
   <header id="header">
     <h1>Tonight's show <a *ngIf="tonightRepresentation">{{tonightRepresentation.title}}</a></h1>
+    <a class="back" routerLink="/">go back</a>
   </header>
   <div class="form">
     <input [(ngModel)]="firstName" type="text" placeholder="Your first name">

@@ -10,12 +10,17 @@ import java.util.List;
 
 public interface RepresentationService {
 
-    public List<Representation> findAll();
+    List<Representation> findAll();
 
+    List<Representation> findByTitle(String title);
 
-    public List<Representation> findByTitle(String title);
+    List<Representation> findByDate(LocalDate localDate);
 
-    public List<Representation> findByDate(LocalDate localDate);
+    List<SeatDTO> getRoomConfiguration(Integer representationId);
 
-    public List<SeatDTO> getRoomConfiguration(Integer representationId);
+    void save(Representation representation) throws Exception;
+
+    void update(Representation representation) throws Exception;
+
+    void delete(Integer id) throws Exception;
 }

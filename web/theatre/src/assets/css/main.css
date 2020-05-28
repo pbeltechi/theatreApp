@@ -2216,11 +2216,10 @@
 		background-color: #FF6382;
 		border-radius: 4px;
 		border: 0;
-		color: !important;
+		color: white!important;
 		cursor: pointer;
 		display: inline-block;
 		font-weight: 200;
-		height: 2.85em;
 		line-height: 2.95em;
 		padding: 0 1.5em;
 		text-align: center;

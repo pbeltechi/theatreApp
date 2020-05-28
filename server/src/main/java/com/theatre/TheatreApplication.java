@@ -1,13 +1,7 @@
 package com.theatre;
 
-import com.theatre.model.Client;
-import com.theatre.model.Representation;
-import com.theatre.model.Reservation;
-import com.theatre.model.Seat;
-import com.theatre.repository.ClientRepository;
-import com.theatre.repository.RepresentationRepository;
-import com.theatre.repository.ReservationRepository;
-import com.theatre.repository.SeatRepository;
+import com.theatre.model.*;
+import com.theatre.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,7 +20,7 @@ import java.util.Set;
 public class TheatreApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TheatreApplication.class, args);
+        ApplicationContext context = SpringApplication.run(TheatreApplication.class, args);
     }
 
 }

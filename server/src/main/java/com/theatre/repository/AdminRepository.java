@@ -1,14 +1,14 @@
 package com.theatre.repository;
 
+import com.theatre.model.Admin;
 import com.theatre.model.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ClientRepository extends JpaRepository<Client, Integer> {
+public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
-    Optional<Client> findByFirstNameAndLastName(String firstName, String lastName);
+    Optional<Admin> findByUsernameAndPassword(String username, String password);
 }

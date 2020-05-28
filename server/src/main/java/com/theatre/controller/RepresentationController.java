@@ -6,6 +6,10 @@ import com.theatre.model.SeatDTO;
 import com.theatre.service.RepresentationServiceImpl;
 import com.theatre.service.interfaces.RepresentationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -39,5 +43,37 @@ public class RepresentationController {
     @GetMapping("/room")
     public List<SeatDTO> roomConfiguration(@RequestParam("id") Integer representationId) {
         return this.representationService.getRoomConfiguration(representationId);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> save(@RequestBody Representation representation) {
+        try {
+            this.representationService.save(representation);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(representation,HttpStatus.OK);
+    }
+    @PutMapping
+    public ResponseEntity<?> update(@RequestBody Representation representation) {
+        try {
+            this.representationService.update(representation);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(representation,HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> delete(@RequestParam("id") Integer id) {
+        try {
+            this.representationService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(id,HttpStatus.OK);
     }
 }

@@ -1,0 +1,61 @@
+<ng-template [ngIf]="!isLoggedIn">
+  <div id="id01" class="modal">
+    <form class="modal-content">
+      <div class="imgcontainer">
+        <a class="close" title="back" routerLink="/">&times;</a>
+        <h2 class="avatar">Log in as admin</h2>
+      </div>
+      <div class="container">
+        <label class="label" for="uname">Username</label>
+        <input id="uname" type="text" placeholder="Enter Username" name="uname" [(ngModel)]="username" required>
+        <label for="psw">Password</label>
+        <input id="psw" type="password" placeholder="Enter Password" name="psw" [(ngModel)]="password" required>
+        <ng-template [ngIf]="loginError">
+          <span class="error">{{loginError}}</span>
+        </ng-template>
+        <button class="submit" type="submit" (click)="login()">Login</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template [ngIf]="isLoggedIn">
+  <a class="home" routerLink="/">go home</a>
+  <div class="admin-main">
+    <ng-template [ngIf]="representations">
+      <h2>Manage Representations</h2>
+      <ul class="repr-ul">
+        <li #li *ngFor="let representation of representations;" class="repr" (click)="representationClick(li,representation)">
+          <p>title: <b>{{representation.title}}</b></p>
+          <p>location: <b>{{representation.location}}</b></p>
+          <p>time: <b>{{representation.date | date}}, {{representation.time}}</b></p>
+        </li>
+      </ul>
+    </ng-template>
+  </div>
+  <ng-template [ngIf]="selectedRepresentation">
+    <ng-template [ngIf]="reprError">
+      <div class="error-repr">
+        <p>{{reprError}}</p>
+      </div>
+    </ng-template>
+    <div class="information">
+      <ul class="buttons">
+        <li><button (click)="add()">add</button></li>
+        <li><button (click)="update()">update</button></li>
+        <li><button (click)="delete()">delete</button></li>
+      </ul>
+      <form class="manage">
+        <label for="title">title</label>
+        <input required name="title" type="text" id="title" [(ngModel)]="reprTitle">
+        <label for="location">location</label>
+        <input required name="location" type="text" id="location" [(ngModel)]="reprLocation">
+        <label for="date">date</label>
+        <input required name="date" type="text" id="date" [(ngModel)]="reprDate">
+        <label for="time">time</label>
+        <input required name="text" type="text" id="time" [(ngModel)]="reprTime">
+      </form>
+    </div>
+  </ng-template>
+
+</ng-template>
+

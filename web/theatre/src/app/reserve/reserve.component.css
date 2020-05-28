@@ -9,6 +9,10 @@
   transition: all 0.4s ease;
 }
 
+.back {
+  z-index: 1000;
+}
+
 .selected-seat {
   background: rgba(255, 255, 255, 0.3);
   -moz-transition: all 0.4s ease;

@@ -1,13 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Client, httpOptions, Representation, Reservation, Seat, SeatDTO} from "../model/representation";
+import {WebSocket} from "../service/web-socket.service";
 
 @Component({
   selector: 'app-reserve',
   templateUrl: './reserve.component.html',
   styleUrls: ['./reserve.component.css']
 })
-export class ReserveComponent implements OnInit {
+export class ReserveComponent implements OnInit, OnDestroy {
   tonightRepresentation: Representation;
   roomSeats: SeatDTO[];
   firstName: string;
@@ -15,6 +16,7 @@ export class ReserveComponent implements OnInit {
   error: string;
   information: string;
   price: number = 0;
+  webSocket: WebSocket;
 
   constructor(private httpClient: HttpClient) {
   }
@@ -24,7 +26,13 @@ export class ReserveComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.webSocket = new WebSocket(this);
+    this.webSocket._connect();
     this.getTonightRepresentation();
+  }
+
+  ngOnDestroy(): void {
+    this.webSocket._disconnect();
   }
 
   getTonightRepresentation(): void {
@@ -41,6 +49,10 @@ export class ReserveComponent implements OnInit {
     this.httpClient.get(url, httpOptions).subscribe((result: SeatDTO[]) => {
       this.roomSeats = result;
     });
+  }
+
+  handleMessage(seats: SeatDTO[]): void {
+    this.roomSeats = seats;
   }
 
   selectSeat(seatDiv: HTMLDivElement, seat: SeatDTO): void {
@@ -89,7 +101,7 @@ export class ReserveComponent implements OnInit {
   saveReservation(reservation: Reservation): void {
     const url = 'http://localhost:8080/api/reservation/save'
     this.httpClient.post(url, reservation, httpOptions).subscribe(() => {
-      this.information = 'Reservation was completed successfully';
+      this.information = 'Reservation made successfully';
       setTimeout(() => {
         this.information = undefined;
       }, 3000);
